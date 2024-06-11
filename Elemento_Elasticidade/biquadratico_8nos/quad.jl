@@ -35,7 +35,7 @@ function B_bi8n(r,s,X,Y)
    J = zeros(2,2)
 
    # Loop do somatório para cada posição de J
-   for i=1:4
+   for i=1:8
        J[1,1] += dNr[i]*X[i]
        J[1,2] += dNr[i]*Y[i]
        J[2,1] += dNs[i]*X[i]
@@ -90,10 +90,10 @@ function K_bi8n(C::AbstractMatrix,X::Vector,Y::Vector,esp::Float64)
     # Loop pelos pontos de Gauss
     # Ao inves de calcular para os infinitos pontos do elemento
     # podemos calcular apenas nos pontos de Gauss
-    for i=1:2
+    for i=1:3
         r  = pg[i]
         wr = W[i]
-        for j=1:2
+        for j=1:3
            s  = pg[j]  
            ws = W[j]
 
