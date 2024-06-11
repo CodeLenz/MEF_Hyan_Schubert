@@ -2,10 +2,10 @@
 # conectividades é uma matriz com ne linhas (número de elementos)
 # e 2 colunas (nó inicial e nó final)
 #
-function Global(ne,nnos,conectividades,coord, VE,Vnuxy, esp)
+function Global(ne,nnos,conectividades,coord, VE,Vnuxy, esp; bolha=true)
 
     # Precisamos definir a matriz global
-    K = zeros(2*nnos,2*nnos)
+    K = spzeros(2*nnos,2*nnos)
 
     # Aloca vetores para as coordenadas de cada elemento
     X = zeros(4)
@@ -37,7 +37,7 @@ function Global(ne,nnos,conectividades,coord, VE,Vnuxy, esp)
 
         # Monta a matriz de rigidez do elemento
         # no sistema local
-        Kg = K_bolha(C,X,Y,esp)
+        Kg = K_bolha(C,X,Y,esp, bolha=bolha)
 
         # Agora precisamos posicionar Kg na matriz global do problema
 

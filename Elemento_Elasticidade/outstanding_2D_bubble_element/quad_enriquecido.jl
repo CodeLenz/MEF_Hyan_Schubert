@@ -69,7 +69,7 @@ end
 #
 include("guyan.jl")
 
-function K_bolha(C::AbstractMatrix,X::Vector,Y::Vector,esp::Float64)
+function K_bolha(C::AbstractMatrix,X::Vector,Y::Vector,esp::Float64; bolha)
 
     # Aloca a matriz do elemento
     KA = zeros(12,12)
@@ -97,12 +97,18 @@ function K_bolha(C::AbstractMatrix,X::Vector,Y::Vector,esp::Float64)
         end #j
     end # i
 
-    # Aplica Condensação Estática (Redução de Guyan)
-    # Graus de liberdade mestres
-    glm = Int[1;2;3;4;5;6;7;8]
-    K = Guyan(KA, glm )
+    if bolha
+        
+        # Aplica Condensação Estática (Redução de Guyan)
+        # Graus de liberdade mestres
+        glm = Int[1;2;3;4;5;6;7;8]
+        K = Guyan(KA, glm )
 
-    # Retorna a matriz de rigidez do elmemento
-    return K
+        # Retorna a matriz de rigidez do elmemento
+        return K
+    
+    else
+        return KA[1:8,1:8]
+    end
 
 end
