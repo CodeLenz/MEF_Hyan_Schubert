@@ -46,37 +46,6 @@ function Gera_malha(Lx::Float64, nx::Int64, Ly::Float64, ny::Int64, force=1.0;
         no1 += 1; no2 += 1; no3 += 1; no4 += 1
     end #j
 
-    # Gera a matrix de coordenadas nodais
-    x = origin[1]-dx
-    y = origin[2]-dy
-    cont = 0
-    for j=1:ny+1
-        y += dy
-        for i=1:nx+1
-            x += dx
-            cont += 1
-            coord[cont,:] = [x y]
-        end #i
-        x = origin[1]-dx
-    end #j
-
-    # Gera a matrix de conectividades
-    ne = (nx)*(ny)
-    connect = zeros(Int64,ne,4)
-    no1 = 1
-    no2 = 2
-    no3 = (nx+1)+2
-    no4 = no3-1
-    cont = 0
-    for j=1:ny
-        for i=1:nx
-            cont += 1
-            connect[cont,:] = [no1 no2 no3 no4]
-            no1 += 1; no2 += 1; no3 += 1; no4 += 1
-        end #i
-        no1 += 1; no2 += 1; no3 += 1; no4 += 1
-    end #j
-
     # Condições de contorno essenciais (engaste)
     nhebc = 2*(ny+1)
     hebc = Array{Float64}(undef,nhebc,3)
